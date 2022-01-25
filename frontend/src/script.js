@@ -25,10 +25,10 @@ const queryValues = {
   b: "",
   input: {
     name: "",
-    phoneExtension:"",
     email: "",
-    sector: "",
-    birthDate: ""
+    extension:"",
+    birthDay: "",
+    sector: ""
   }
 };
 
@@ -39,10 +39,11 @@ function getQueryValues() {
   queryValues.a = document.getElementById("birthMonth").value;
   queryValues.b = selectOption.options[selectOption.selectedIndex].value;
   queryValues.input.name = document.getElementById("name").value;
-  queryValues.input.phoneExtension = document.getElementById("phone").value;
   queryValues.input.email = document.getElementById("email").value;
+  queryValues.input.extension = document.getElementById("phone").value;
+  queryValues.input.birthDay = new Date( document.getElementById("niver").value ).toISOString().split('T')[0];
   queryValues.input.sector = document.getElementById("setor").value;
-  queryValues.input.birthDate = new Date( document.getElementById("niver").value ).toLocaleDateString('pt-BR', {year: 'numeric', month: 'numeric', day: 'numeric'}) ;
+  
   return queryValues;
 }
 
@@ -137,6 +138,7 @@ const promises = {
   },
   adicionarUsuario: function() {
     getQueryValues()
+    
     console.log(queryValues.input)
     const requestOptions = {
         method: 'POST',
