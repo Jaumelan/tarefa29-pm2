@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const port = 3000;
+const port = 3005;
 const fs = require('fs');
 
 const app = express();
@@ -12,6 +12,7 @@ app.use(express.json());
 const birthdates = require('./components/birthday.js');
 const funcionarios = require('./components/funcionarios.js');
 const onlyPhones = require('./components/ramais');
+const sectorFields = require('./components/sectors.js')
 
 
 //configurações das rotas
@@ -33,7 +34,7 @@ app.post('/adicionar', (req,res) => {
     let data = req.body;
     console.log(data);
     let before = JSON.parse( fs.readFileSync("database.json") );
-    data.idNumber = before.length + 1;
+    data.id = before.length + 1;
     before.push(data);
 
     fs.writeFileSync("database.json", JSON.stringify(before))
@@ -42,3 +43,6 @@ app.post('/adicionar', (req,res) => {
 
 //listen
 app.listen(port, () => console.log(`Yeap! online on ${port}`));
+
+//sectors fields
+app.get('/fields', (req, res) => res.send( sectorFields() ) )

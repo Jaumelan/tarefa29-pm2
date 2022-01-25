@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:3000";
+const apiUrl = "http://localhost:3005";
 const selectOption = document.getElementById("sector");
 
 const buttons = {
@@ -38,6 +38,11 @@ const response = document.querySelector("tbody");
 function getQueryValues() {
   queryValues.a = document.getElementById("birthMonth").value;
   queryValues.b = selectOption.options[selectOption.selectedIndex].value;
+   
+  return queryValues;
+}
+
+function getInputValues() {
   queryValues.input.name = document.getElementById("name").value;
   queryValues.input.email = document.getElementById("email").value;
   queryValues.input.extension = document.getElementById("phone").value;
@@ -137,7 +142,7 @@ const promises = {
       .catch();
   },
   adicionarUsuario: function() {
-    getQueryValues()
+    getInputValues()
     
     console.log(queryValues.input)
     const requestOptions = {
@@ -146,7 +151,7 @@ const promises = {
         body : JSON.stringify(queryValues.input)
     };
 
-    fetch("http://localhost:3000/adicionar", requestOptions).then(response => response.json())
+    fetch("http://localhost:3005/adicionar", requestOptions).then(response => response.json())
     .then(el => { console.log(el); })
     
   }

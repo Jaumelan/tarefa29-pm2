@@ -4,11 +4,9 @@ module.exports = function birthdates(param) {
     const rawData = JSON.parse( fs.readFileSync("database.json") );
     
     const aniversariantes = rawData.filter(user => {
-        let [year , month , day] = user.birthDate.split("-");
+        let [year , month , day] = user.birthDay.split("-");
         
         if ( Number(month) === Number(param) ) {
-            //let a = {name: user.name, birth: user.birthDate};
-            
             return true;
         } else { 
             return false;
